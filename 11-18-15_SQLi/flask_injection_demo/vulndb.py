@@ -5,6 +5,10 @@ def is_valid_user(uname, pword):
     c = conn.cursor()
     QUERY = "SELECT * FROM users WHERE uname = \'%s\' AND pword = \'%s\'" % (uname, pword)
     print QUERY
-    result = c.execute(QUERY).fetchall()
+    result = []
+    try:
+        result = c.execute(QUERY).fetchall()
+    except:
+        return False
     conn.close()
     return len(result) == 1
